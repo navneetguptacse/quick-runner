@@ -33,9 +33,6 @@ jobs:
             - name: Build extension
               run: npm run build
 
-            - name: Package extension (.vsix)
-              run: npx --yes @vscode/vsce package --no-git-tag-version
-
             - name: Determine tag name
               id: vars
               run: |
@@ -44,6 +41,14 @@ jobs:
                   else
                     echo "tag=${{ github.ref_name }}" >> $GITHUB_OUTPUT
                   fi
+
+            - name: Sync package version with tag
+              run: |
+                  TAG_VER="${{ steps.vars.outputs.tag }}"
+                  npm version "${TAG_VER#v}" --no-git-tag-version --allow-same-version
+
+            - name: Package extension (.vsix)
+              run: npx --yes @vscode/vsce package --no-git-tag-version
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v3
