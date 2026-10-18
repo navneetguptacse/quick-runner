@@ -26,9 +26,9 @@ class Utility {
                     if (!extension.isActive) {
                         yield extension.activate();
                     }
-                    const execCommand = extension.exports.settings.getExecutionDetails ?
-                        extension.exports.settings.getExecutionDetails(document === null || document === void 0 ? void 0 : document.uri).execCommand :
-                        extension.exports.settings.getExecutionCommand(document === null || document === void 0 ? void 0 : document.uri);
+                    const execCommand = extension.exports.settings.getExecutionDetails
+                        ? extension.exports.settings.getExecutionDetails(document === null || document === void 0 ? void 0 : document.uri).execCommand
+                        : extension.exports.settings.getExecutionCommand(document === null || document === void 0 ? void 0 : document.uri);
                     return execCommand ? execCommand.join(" ") : constants_1.Constants.python;
                 }
                 else {

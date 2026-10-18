@@ -3,7 +3,6 @@ import * as vscode from "vscode";
 import { CodeManager } from "./codeManager";
 
 export function activate(context: vscode.ExtensionContext) {
-
     const codeManager = new CodeManager();
 
     vscode.window.onDidCloseTerminal(() => {
@@ -33,5 +32,4 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(codeManager);
 }
 
-export function deactivate() {
-}
+export function deactivate() {}

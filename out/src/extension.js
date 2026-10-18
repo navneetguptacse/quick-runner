@@ -27,7 +27,6 @@ function activate(context) {
     context.subscriptions.push(codeManager);
 }
 exports.activate = activate;
-function deactivate() {
-}
+function deactivate() { }
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map

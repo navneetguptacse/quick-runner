@@ -22,29 +22,29 @@ Run code snippet or code file for multiple languages: **C, C++, Java, JavaScript
 ## Usages
 
 - **To run code:**
-  - Use shortcut `Ctrl+Alt+N`
-  - Or press `F1` and then select/type `Run Code`
-  - Or right click the Text Editor and then click `Run Code` in editor context menu
-  - Or click `Run Code` button in editor title menu
-  - Or click `Run Code` button in context menu of file explorer
+    - Use shortcut `Ctrl+Alt+N`
+    - Or press `F1` and then select/type `Run Code`
+    - Or right click the Text Editor and then click `Run Code` in editor context menu
+    - Or click `Run Code` button in editor title menu
+    - Or click `Run Code` button in context menu of file explorer
 - **To stop the running code:**
-  - Use shortcut `Ctrl+Alt+M`
-  - Or press `F1` and then select/type `Stop Code Run`
-  - Or click `Stop Code Run` button in editor title menu
-  - Or right click the Output Channel and then click `Stop Code Run` in context menu
+    - Use shortcut `Ctrl+Alt+M`
+    - Or press `F1` and then select/type `Stop Code Run`
+    - Or click `Stop Code Run` button in editor title menu
+    - Or right click the Output Channel and then click `Stop Code Run` in context menu
 
 ![Usage](./images/usage.gif)
 
 - **To select language to run:**
-  - Use shortcut `Ctrl+Alt+J`
-  - Or press `F1` and then select/type `Run By Language`
-  - Then type or select the language to run: e.g. `php, javascript, bat, shellscript...`
+    - Use shortcut `Ctrl+Alt+J`
+    - Or press `F1` and then select/type `Run By Language`
+    - Then type or select the language to run: e.g. `php, javascript, bat, shellscript...`
 
 ![Usage](./images/usageRunByLanguage.gif)
 
 - **To run custom command:**
-  - Use shortcut `Ctrl+Alt+K`
-  - Or press `F1` and then select/type `Run Custom Command`
+    - Use shortcut `Ctrl+Alt+K`
+    - Or press `F1` and then select/type `Run Custom Command`
 
 ## Configuration
 
@@ -56,12 +56,12 @@ To configure output options and custom compiler/runtime commands in your `settin
 
 ```json
 {
-  "quick-runner.clearPreviousOutput": true,
-  "quick-runner.showExecutionMessage": false,
-  "quick-runner.executorMap": {
-    "cpp": "clang++ -std=c++20 -O2 -Wall \"$fileName\" -o \"$fileNameWithoutExt\" && \"./$fileNameWithoutExt\"",
-    "python": "python -u \"$fileName\""
-  }
+    "quick-runner.clearPreviousOutput": true,
+    "quick-runner.showExecutionMessage": false,
+    "quick-runner.executorMap": {
+        "cpp": "clang++ -std=c++20 -O2 -Wall \"$fileName\" -o \"$fileNameWithoutExt\" && \"./$fileNameWithoutExt\"",
+        "python": "python -u \"$fileName\""
+    }
 }
 ```
 
@@ -72,18 +72,18 @@ You can customize `quick-runner.executorMap` to set specific commands or paths f
 
 ```json
 {
-  "quick-runner.executorMap": {
-    "javascript": "node",
-    "php": "C:\\php\\php.exe",
-    "python": "python -u \"$fileName\"",
-    "perl": "perl",
-    "ruby": "C:\\Ruby23-x64\\bin\\ruby.exe",
-    "go": "go run",
-    "html": "\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\"",
-    "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
-    "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-    "cpp": "clang++ -std=c++20 -O2 -Wall \"$fileName\" -o \"$fileNameWithoutExt\" && \"./$fileNameWithoutExt\""
-  }
+    "quick-runner.executorMap": {
+        "javascript": "node",
+        "php": "C:\\php\\php.exe",
+        "python": "python -u \"$fileName\"",
+        "perl": "perl",
+        "ruby": "C:\\Ruby23-x64\\bin\\ruby.exe",
+        "go": "go run",
+        "html": "\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\"",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "cpp": "clang++ -std=c++20 -O2 -Wall \"$fileName\" -o \"$fileNameWithoutExt\" && \"./$fileNameWithoutExt\""
+    }
 }
 ```
 
@@ -100,6 +100,7 @@ You can customize `quick-runner.executorMap` to set specific commands or paths f
 
 > [!NOTE]
 > Please take care of backslashes and spaces in file paths:
+>
 > - Backslash: please use `\\`
 > - If there are spaces in file paths, please use `\"` to wrap your path
 
@@ -109,11 +110,11 @@ You can set executors per filename glob:
 
 ```json
 {
-  "quick-runner.executorMapByGlob": {
-    "pom.xml": "cd $dir && mvn clean package",
-    "*.test.js": "tap",
-    "*.js": "node"
-  }
+    "quick-runner.executorMapByGlob": {
+        "pom.xml": "cd $dir && mvn clean package",
+        "*.test.js": "tap",
+        "*.js": "node"
+    }
 }
 ```
 
@@ -123,7 +124,7 @@ Set default language when file language cannot be determined:
 
 ```json
 {
-  "quick-runner.defaultLanguage": "javascript"
+    "quick-runner.defaultLanguage": "javascript"
 }
 ```
 
@@ -131,10 +132,10 @@ Set default language when file language cannot be determined:
 
 ```json
 {
-  "quick-runner.executorMapByFileExtension": {
-    ".vbs": "cscript //Nologo",
-    ".kt": "cd $dir && kotlinc $fileName -include-runtime -d $fileNameWithoutExt.jar && java -jar $fileNameWithoutExt.jar"
-  }
+    "quick-runner.executorMapByFileExtension": {
+        ".vbs": "cscript //Nologo",
+        ".kt": "cd $dir && kotlinc $fileName -include-runtime -d $fileNameWithoutExt.jar && java -jar $fileNameWithoutExt.jar"
+    }
 }
 ```
 
@@ -142,7 +143,7 @@ Set default language when file language cannot be determined:
 
 ```json
 {
-  "quick-runner.customCommand": "echo Hello"
+    "quick-runner.customCommand": "echo Hello"
 }
 ```
 
@@ -150,11 +151,12 @@ Set default language when file language cannot be determined:
 
 ```json
 {
-  "quick-runner.cwd": "path/to/working/directory"
+    "quick-runner.cwd": "path/to/working/directory"
 }
 ```
 
 **About CWD Setting priority:**
+
 1. By default, use the `quick-runner.cwd` setting
 2. If `quick-runner.cwd` is not set and `quick-runner.fileDirectoryAsCwd` is `true`, use the directory of the file to be executed
 3. If `quick-runner.cwd` is not set and `quick-runner.fileDirectoryAsCwd` is `false`, use the path of root folder open in VS Code

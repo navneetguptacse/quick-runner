@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-  - name: GitHub Issues
-    url: https://github.com/navneetguptacse/quick-runner/issues
-    about: Ask questions, report bugs, or suggest features here.
+    - name: GitHub Issues
+      url: https://github.com/navneetguptacse/quick-runner/issues
+      about: Ask questions, report bugs, or suggest features here.

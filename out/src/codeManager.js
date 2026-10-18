@@ -79,7 +79,9 @@ class CodeManager {
     runByLanguage() {
         const config = this.getConfiguration("quick-runner");
         const executorMap = config.get("executorMap");
-        vscode.window.showQuickPick(Object.keys(executorMap), { placeHolder: "Type or select language to run" }).then((languageId) => {
+        vscode.window
+            .showQuickPick(Object.keys(executorMap), { placeHolder: "Type or select language to run" })
+            .then((languageId) => {
             if (languageId !== undefined) {
                 this.run(languageId);
             }
@@ -119,8 +121,9 @@ class CodeManager {
             return;
         }
         this._workspaceFolder = this.getWorkspaceFolder();
-        if ((this._config.get("fileDirectoryAsCwd") || !this._workspaceFolder)
-            && this._document && !this._document.isUntitled) {
+        if ((this._config.get("fileDirectoryAsCwd") || !this._workspaceFolder) &&
+            this._document &&
+            !this._document.isUntitled) {
             this._cwd = (0, path_1.dirname)(this._document.fileName);
         }
         else {
@@ -155,7 +158,8 @@ class CodeManager {
             selection = activeTextEditor.selection;
         }
         const ignoreSelection = this._config.get("ignoreSelection");
-        if ((this._runFromExplorer || !selection || selection.isEmpty || ignoreSelection) && !this._document.isUntitled) {
+        if ((this._runFromExplorer || !selection || selection.isEmpty || ignoreSelection) &&
+            !this._document.isUntitled) {
             this._isTmpFile = false;
             this._codeFile = this._document.fileName;
             if (this._config.get("saveAllFilesBeforeRun")) {
@@ -170,8 +174,9 @@ class CodeManager {
             }
         }
         else {
-            let text = (this._runFromExplorer || !selection || selection.isEmpty || ignoreSelection) ?
-                this._document.getText() : this._document.getText(selection);
+            let text = this._runFromExplorer || !selection || selection.isEmpty || ignoreSelection
+                ? this._document.getText()
+                : this._document.getText(selection);
             if (this._languageId === "php") {
                 text = text.trim();
                 if (!text.startsWith("<?php")) {
@@ -185,7 +190,10 @@ class CodeManager {
         this.executeCommand(executor, appendFile);
     }
     rndName() {
-        return Math.random().toString(36).replace(/[^a-z]+/g, "").substr(0, 10);
+        return Math.random()
+            .toString(36)
+            .replace(/[^a-z]+/g, "")
+            .substr(0, 10);
     }
     createRandomFile(content, folder, fileExtension) {
         let fileType = "";
@@ -278,22 +286,27 @@ class CodeManager {
             let cmd = executor;
             if (this._codeFile) {
                 const codeFileDir = this.getCodeFileDir();
-                const pythonPath = cmd.includes("$pythonPath") ? yield utility_1.Utility.getPythonPath(this._document) : constants_1.Constants.python;
+                const pythonPath = cmd.includes("$pythonPath")
+                    ? yield utility_1.Utility.getPythonPath(this._document)
+                    : constants_1.Constants.python;
                 const placeholders = [
                     { regex: /\$workspaceRoot/g, replaceValue: this.getWorkspaceRoot(codeFileDir) },
                     { regex: /\$fileNameWithoutExt/g, replaceValue: this.getCodeFileWithoutDirAndExt() },
                     { regex: /\$fullFileName/g, replaceValue: this.quoteFileName(this._codeFile) },
                     { regex: /\$fileName/g, replaceValue: this.getCodeBaseFile() },
                     { regex: /\$driveLetter/g, replaceValue: this.getDriveLetter() },
-                    { regex: /\$dirWithoutTrailingSlash/g, replaceValue: this.quoteFileName(this.getCodeFileDirWithoutTrailingSlash()) },
+                    {
+                        regex: /\$dirWithoutTrailingSlash/g,
+                        replaceValue: this.quoteFileName(this.getCodeFileDirWithoutTrailingSlash())
+                    },
                     { regex: /\$dir/g, replaceValue: this.quoteFileName(codeFileDir) },
-                    { regex: /\$pythonPath/g, replaceValue: pythonPath },
+                    { regex: /\$pythonPath/g, replaceValue: pythonPath }
                 ];
                 placeholders.forEach((placeholder) => {
                     cmd = cmd.replace(placeholder.regex, placeholder.replaceValue);
                 });
             }
-            return (cmd !== executor ? cmd : executor + (appendFile ? " " + this.quoteFileName(this._codeFile) : ""));
+            return cmd !== executor ? cmd : executor + (appendFile ? " " + this.quoteFileName(this._codeFile) : "");
         });
     }
     changeExecutorFromCmdToPs(executor) {
@@ -309,7 +322,9 @@ class CodeManager {
     }
     isPowershellOnWindows() {
         if (os.platform() === "win32") {
-            const defaultProfile = vscode.workspace.getConfiguration("terminal").get("integrated.defaultProfile.windows");
+            const defaultProfile = vscode.workspace
+                .getConfiguration("terminal")
+                .get("integrated.defaultProfile.windows");
             if (defaultProfile) {
                 if (defaultProfile.toLowerCase().includes("powershell")) {
                     return true;
@@ -319,7 +334,7 @@ class CodeManager {
                 }
             }
             const windowsShell = vscode.env.shell;
-            return (windowsShell && windowsShell.toLowerCase().includes("powershell"));
+            return windowsShell && windowsShell.toLowerCase().includes("powershell");
         }
         return false;
     }
@@ -332,7 +347,9 @@ class CodeManager {
                     .replace(/([A-Za-z]):\\/g, (match, p1) => `${terminalRoot}${p1.toLowerCase()}/`)
                     .replace(/\\/g, "/");
             }
-            else if (windowsShell && windowsShell.toLowerCase().indexOf("bash") > -1 && windowsShell.toLowerCase().indexOf("windows") > -1) {
+            else if (windowsShell &&
+                windowsShell.toLowerCase().indexOf("bash") > -1 &&
+                windowsShell.toLowerCase().indexOf("windows") > -1) {
                 command = command.replace(/([A-Za-z]):\\/g, this.replacer).replace(/\\/g, "/");
             }
         }

@@ -90,11 +90,13 @@ export class CodeManager implements vscode.Disposable {
     public runByLanguage(): void {
         const config = this.getConfiguration("quick-runner");
         const executorMap = config.get<any>("executorMap");
-        vscode.window.showQuickPick(Object.keys(executorMap), { placeHolder: "Type or select language to run" }).then((languageId) => {
-            if (languageId !== undefined) {
-                this.run(languageId);
-            }
-        });
+        vscode.window
+            .showQuickPick(Object.keys(executorMap), { placeHolder: "Type or select language to run" })
+            .then((languageId) => {
+                if (languageId !== undefined) {
+                    this.run(languageId);
+                }
+            });
     }
 
     public stop(): void {
@@ -135,8 +137,11 @@ export class CodeManager implements vscode.Disposable {
             return;
         }
         this._workspaceFolder = this.getWorkspaceFolder();
-        if ((this._config.get<boolean>("fileDirectoryAsCwd") || !this._workspaceFolder)
-            && this._document && !this._document.isUntitled) {
+        if (
+            (this._config.get<boolean>("fileDirectoryAsCwd") || !this._workspaceFolder) &&
+            this._document &&
+            !this._document.isUntitled
+        ) {
             this._cwd = dirname(this._document.fileName);
         } else {
             this._cwd = this._workspaceFolder;
@@ -173,7 +178,10 @@ export class CodeManager implements vscode.Disposable {
         }
         const ignoreSelection = this._config.get<boolean>("ignoreSelection");
 
-        if ((this._runFromExplorer || !selection || selection.isEmpty || ignoreSelection) && !this._document.isUntitled) {
+        if (
+            (this._runFromExplorer || !selection || selection.isEmpty || ignoreSelection) &&
+            !this._document.isUntitled
+        ) {
             this._isTmpFile = false;
             this._codeFile = this._document.fileName;
 
@@ -189,8 +197,10 @@ export class CodeManager implements vscode.Disposable {
                 });
             }
         } else {
-            let text = (this._runFromExplorer || !selection || selection.isEmpty || ignoreSelection) ?
-                this._document.getText() : this._document.getText(selection);
+            let text =
+                this._runFromExplorer || !selection || selection.isEmpty || ignoreSelection
+                    ? this._document.getText()
+                    : this._document.getText(selection);
 
             if (this._languageId === "php") {
                 text = text.trim();
@@ -208,7 +218,10 @@ export class CodeManager implements vscode.Disposable {
     }
 
     private rndName(): string {
-        return Math.random().toString(36).replace(/[^a-z]+/g, "").substr(0, 10);
+        return Math.random()
+            .toString(36)
+            .replace(/[^a-z]+/g, "")
+            .substr(0, 10);
     }
 
     private createRandomFile(content: string, folder: string, fileExtension: string) {
@@ -315,16 +328,21 @@ export class CodeManager implements vscode.Disposable {
 
         if (this._codeFile) {
             const codeFileDir = this.getCodeFileDir();
-            const pythonPath = cmd.includes("$pythonPath") ? await Utility.getPythonPath(this._document) : Constants.python;
-            const placeholders: Array<{ regex: RegExp, replaceValue: string }> = [
+            const pythonPath = cmd.includes("$pythonPath")
+                ? await Utility.getPythonPath(this._document)
+                : Constants.python;
+            const placeholders: Array<{ regex: RegExp; replaceValue: string }> = [
                 { regex: /\$workspaceRoot/g, replaceValue: this.getWorkspaceRoot(codeFileDir) },
                 { regex: /\$fileNameWithoutExt/g, replaceValue: this.getCodeFileWithoutDirAndExt() },
                 { regex: /\$fullFileName/g, replaceValue: this.quoteFileName(this._codeFile) },
                 { regex: /\$fileName/g, replaceValue: this.getCodeBaseFile() },
                 { regex: /\$driveLetter/g, replaceValue: this.getDriveLetter() },
-                { regex: /\$dirWithoutTrailingSlash/g, replaceValue: this.quoteFileName(this.getCodeFileDirWithoutTrailingSlash()) },
+                {
+                    regex: /\$dirWithoutTrailingSlash/g,
+                    replaceValue: this.quoteFileName(this.getCodeFileDirWithoutTrailingSlash())
+                },
                 { regex: /\$dir/g, replaceValue: this.quoteFileName(codeFileDir) },
-                { regex: /\$pythonPath/g, replaceValue: pythonPath },
+                { regex: /\$pythonPath/g, replaceValue: pythonPath }
             ];
 
             placeholders.forEach((placeholder) => {
@@ -332,7 +350,7 @@ export class CodeManager implements vscode.Disposable {
             });
         }
 
-        return (cmd !== executor ? cmd : executor + (appendFile ? " " + this.quoteFileName(this._codeFile) : ""));
+        return cmd !== executor ? cmd : executor + (appendFile ? " " + this.quoteFileName(this._codeFile) : "");
     }
 
     private changeExecutorFromCmdToPs(executor: string): string {
@@ -349,7 +367,9 @@ export class CodeManager implements vscode.Disposable {
 
     private isPowershellOnWindows(): boolean {
         if (os.platform() === "win32") {
-            const defaultProfile = vscode.workspace.getConfiguration("terminal").get<string>("integrated.defaultProfile.windows");
+            const defaultProfile = vscode.workspace
+                .getConfiguration("terminal")
+                .get<string>("integrated.defaultProfile.windows");
             if (defaultProfile) {
                 if (defaultProfile.toLowerCase().includes("powershell")) {
                     return true;
@@ -358,7 +378,7 @@ export class CodeManager implements vscode.Disposable {
                 }
             }
             const windowsShell = vscode.env.shell;
-            return (windowsShell && windowsShell.toLowerCase().includes("powershell"));
+            return windowsShell && windowsShell.toLowerCase().includes("powershell");
         }
         return false;
     }
@@ -371,7 +391,11 @@ export class CodeManager implements vscode.Disposable {
                 command = command
                     .replace(/([A-Za-z]):\\/g, (match, p1) => `${terminalRoot}${p1.toLowerCase()}/`)
                     .replace(/\\/g, "/");
-            } else if (windowsShell && windowsShell.toLowerCase().indexOf("bash") > -1 && windowsShell.toLowerCase().indexOf("windows") > -1) {
+            } else if (
+                windowsShell &&
+                windowsShell.toLowerCase().indexOf("bash") > -1 &&
+                windowsShell.toLowerCase().indexOf("windows") > -1
+            ) {
                 command = command.replace(/([A-Za-z]):\\/g, this.replacer).replace(/\\/g, "/");
             }
         }
