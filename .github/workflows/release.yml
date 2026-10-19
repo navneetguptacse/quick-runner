@@ -13,6 +13,7 @@ on:
 
 permissions:
     contents: write
+    id-token: write
 
 jobs:
     release:
@@ -49,6 +50,9 @@ jobs:
 
             - name: Package extension (.vsix)
               run: npx --yes @vscode/vsce package --no-git-tag-version
+
+            - name: Publish to Open VSX (trusted publishing)
+              run: npx --yes ovsx publish *.vsix --trusted-publishing
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v3
