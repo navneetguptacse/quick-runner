@@ -1,7 +1,11 @@
 # Quick Runner
 
-[![GitHub](https://img.shields.io/badge/GitHub-navneetguptacse%2Fquick--runner-blue?logo=github)](https://github.com/navneetguptacse/quickrunner)
+[![Website](https://img.shields.io/badge/Website-quickrunner.in-007acc)](https://quickrunner.in)
+[![GitHub](https://img.shields.io/badge/GitHub-navneetguptacse%2Fquickrunner-blue?logo=github)](https://github.com/navneetguptacse/quickrunner)
+[![Build Status](https://github.com/navneetguptacse/quickrunner/actions/workflows/main.yml/badge.svg)](https://github.com/navneetguptacse/quickrunner/actions/workflows/main.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Website: [https://quickrunner.in](https://quickrunner.in)
 
 Run code snippet or code file for multiple languages: **C, C++, Java, JavaScript, PHP, Python, Perl, Perl 6, Ruby, Go, Lua, Groovy, PowerShell, BAT/CMD, BASH/SH, F# Script, F# (.NET Core), C# Script, C# (.NET Core), VBScript, TypeScript, CoffeeScript, Scala, Swift, Julia, Crystal, OCaml Script, R, AppleScript, Elixir, Visual Basic .NET, Clojure, Haxe, Objective-C, Rust, Racket, Scheme, AutoHotkey, AutoIt, Kotlin, Dart, Free Pascal, Haskell, Nim, D, Lisp, Kit, V, SCSS, Sass, CUDA, Less, Fortran, Ring, Standard ML, Zig, Mojo, Erlang, SPWN, Pkl, Gleam**, and custom command.
 
@@ -178,6 +182,10 @@ Set default language when file language cannot be determined:
 - `quickrunner.showRunCommandInExplorerContextMenu`: Whether to show 'Run Code' command in explorer context menu (default is `true`).
 - `quickrunner.temporaryFileName`: Temporary file name used in running selected code snippet (default is `"tempQuickRunnerFile"`).
 - `quickrunner.terminalRoot`: For Windows system, replaces Windows style drive letter in command with Unix style root when using a custom shell (default is `""`).
+
+## Website
+
+Visit the official website: [https://quickrunner.in](https://quickrunner.in)
 
 ## Change Log
 
