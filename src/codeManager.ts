@@ -88,7 +88,7 @@ export class CodeManager implements vscode.Disposable {
     }
 
     public runByLanguage(): void {
-        const config = this.getConfiguration("quick-runner");
+        const config = this.getConfiguration("quickrunner");
         const executorMap = config.get<any>("executorMap");
         vscode.window
             .showQuickPick(Object.keys(executorMap), { placeHolder: "Type or select language to run" })
@@ -124,14 +124,14 @@ export class CodeManager implements vscode.Disposable {
     private stopRunning() {
         if (this._isRunning) {
             this._isRunning = false;
-            vscode.commands.executeCommand("setContext", "quick-runner.codeRunning", false);
+            vscode.commands.executeCommand("setContext", "quickrunner.codeRunning", false);
             const kill = require("tree-kill");
             kill(this._process.pid);
         }
     }
 
     private initialize(): void {
-        this._config = this.getConfiguration("quick-runner");
+        this._config = this.getConfiguration("quickrunner");
         this._cwd = this._config.get<string>("cwd");
         if (this._cwd) {
             return;
@@ -152,7 +152,7 @@ export class CodeManager implements vscode.Disposable {
         this._cwd = TmpDir;
     }
 
-    private getConfiguration(section: string = "quick-runner"): vscode.WorkspaceConfiguration {
+    private getConfiguration(section: string = "quickrunner"): vscode.WorkspaceConfiguration {
         return Utility.getConfiguration(section, this._document);
     }
 
@@ -428,7 +428,7 @@ export class CodeManager implements vscode.Disposable {
 
     private async executeCommandInOutputChannel(executor: string, appendFile: boolean = true) {
         this._isRunning = true;
-        vscode.commands.executeCommand("setContext", "quick-runner.codeRunning", true);
+        vscode.commands.executeCommand("setContext", "quickrunner.codeRunning", true);
         const clearPreviousOutput = this._config.get<boolean>("clearPreviousOutput");
         if (clearPreviousOutput) {
             this._outputChannel.clear();
@@ -453,7 +453,7 @@ export class CodeManager implements vscode.Disposable {
 
         this._process.on("close", (code) => {
             this._isRunning = false;
-            vscode.commands.executeCommand("setContext", "quick-runner.codeRunning", false);
+            vscode.commands.executeCommand("setContext", "quickrunner.codeRunning", false);
             const endTime = new Date();
             const elapsedTime = (endTime.getTime() - startTime.getTime()) / 1000;
             this._outputChannel.appendLine("");

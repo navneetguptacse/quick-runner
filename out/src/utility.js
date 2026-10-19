@@ -40,7 +40,7 @@ class Utility {
             }
         });
     }
-    static getConfiguration(section = "quick-runner", document) {
+    static getConfiguration(section = "quickrunner", document) {
         if (document) {
             return vscode.workspace.getConfiguration(section, document.uri);
         }

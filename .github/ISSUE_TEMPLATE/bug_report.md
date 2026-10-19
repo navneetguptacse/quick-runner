@@ -7,7 +7,7 @@ assignees: ""
 ---
 
 <!-- Please search existing issues to avoid creating duplicates. -->
-<!-- FYI issues: https://github.com/navneetguptacse/quick-runner/issues -->
+<!-- FYI issues: https://github.com/navneetguptacse/quickrunner/issues -->
 
 - VS Code Version:
 - OS Version:

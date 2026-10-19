@@ -7,7 +7,7 @@ assignees: ""
 ---
 
 <!-- Please search existing issues to avoid creating duplicates. -->
-<!-- FYI issues: https://github.com/navneetguptacse/quick-runner/issues -->
+<!-- FYI issues: https://github.com/navneetguptacse/quickrunner/issues -->
 
 **Is your feature request related to a problem? Please describe.**
 Description of what the problem is. Ex. I'm always frustrated when [...]

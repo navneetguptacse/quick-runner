@@ -77,7 +77,7 @@ class CodeManager {
         }
     }
     runByLanguage() {
-        const config = this.getConfiguration("quick-runner");
+        const config = this.getConfiguration("quickrunner");
         const executorMap = config.get("executorMap");
         vscode.window
             .showQuickPick(Object.keys(executorMap), { placeHolder: "Type or select language to run" })
@@ -109,13 +109,13 @@ class CodeManager {
     stopRunning() {
         if (this._isRunning) {
             this._isRunning = false;
-            vscode.commands.executeCommand("setContext", "quick-runner.codeRunning", false);
+            vscode.commands.executeCommand("setContext", "quickrunner.codeRunning", false);
             const kill = require("tree-kill");
             kill(this._process.pid);
         }
     }
     initialize() {
-        this._config = this.getConfiguration("quick-runner");
+        this._config = this.getConfiguration("quickrunner");
         this._cwd = this._config.get("cwd");
         if (this._cwd) {
             return;
@@ -134,7 +134,7 @@ class CodeManager {
         }
         this._cwd = TmpDir;
     }
-    getConfiguration(section = "quick-runner") {
+    getConfiguration(section = "quickrunner") {
         return utility_1.Utility.getConfiguration(section, this._document);
     }
     getWorkspaceFolder() {
@@ -382,7 +382,7 @@ class CodeManager {
     executeCommandInOutputChannel(executor, appendFile = true) {
         return __awaiter(this, void 0, void 0, function* () {
             this._isRunning = true;
-            vscode.commands.executeCommand("setContext", "quick-runner.codeRunning", true);
+            vscode.commands.executeCommand("setContext", "quickrunner.codeRunning", true);
             const clearPreviousOutput = this._config.get("clearPreviousOutput");
             if (clearPreviousOutput) {
                 this._outputChannel.clear();
@@ -404,7 +404,7 @@ class CodeManager {
             });
             this._process.on("close", (code) => {
                 this._isRunning = false;
-                vscode.commands.executeCommand("setContext", "quick-runner.codeRunning", false);
+                vscode.commands.executeCommand("setContext", "quickrunner.codeRunning", false);
                 const endTime = new Date();
                 const elapsedTime = (endTime.getTime() - startTime.getTime()) / 1000;
                 this._outputChannel.appendLine("");

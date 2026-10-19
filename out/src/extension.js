@@ -8,16 +8,16 @@ function activate(context) {
     vscode.window.onDidCloseTerminal(() => {
         codeManager.onDidCloseTerminal();
     });
-    const run = vscode.commands.registerCommand("quick-runner.run", (fileUri) => {
+    const run = vscode.commands.registerCommand("quickrunner.run", (fileUri) => {
         codeManager.run(null, fileUri);
     });
-    const runCustomCommand = vscode.commands.registerCommand("quick-runner.runCustomCommand", () => {
+    const runCustomCommand = vscode.commands.registerCommand("quickrunner.runCustomCommand", () => {
         codeManager.runCustomCommand();
     });
-    const runByLanguage = vscode.commands.registerCommand("quick-runner.runByLanguage", () => {
+    const runByLanguage = vscode.commands.registerCommand("quickrunner.runByLanguage", () => {
         codeManager.runByLanguage();
     });
-    const stop = vscode.commands.registerCommand("quick-runner.stop", () => {
+    const stop = vscode.commands.registerCommand("quickrunner.stop", () => {
         codeManager.stop();
     });
     context.subscriptions.push(run);

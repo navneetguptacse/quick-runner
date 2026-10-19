@@ -1,6 +1,6 @@
 # Quick Runner
 
-[![GitHub](https://img.shields.io/badge/GitHub-navneetguptacse%2Fquick--runner-blue?logo=github)](https://github.com/navneetguptacse/quick-runner)
+[![GitHub](https://img.shields.io/badge/GitHub-navneetguptacse%2Fquick--runner-blue?logo=github)](https://github.com/navneetguptacse/quickrunner)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Run code snippet or code file for multiple languages: **C, C++, Java, JavaScript, PHP, Python, Perl, Perl 6, Ruby, Go, Lua, Groovy, PowerShell, BAT/CMD, BASH/SH, F# Script, F# (.NET Core), C# Script, C# (.NET Core), VBScript, TypeScript, CoffeeScript, Scala, Swift, Julia, Crystal, OCaml Script, R, AppleScript, Elixir, Visual Basic .NET, Clojure, Haxe, Objective-C, Rust, Racket, Scheme, AutoHotkey, AutoIt, Kotlin, Dart, Free Pascal, Haskell, Nim, D, Lisp, Kit, V, SCSS, Sass, CUDA, Less, Fortran, Ring, Standard ML, Zig, Mojo, Erlang, SPWN, Pkl, Gleam**, and custom command.
@@ -33,14 +33,14 @@ Run code snippet or code file for multiple languages: **C, C++, Java, JavaScript
     - Or click `Stop Code Run` button in editor title menu
     - Or right click the Output Channel and then click `Stop Code Run` in context menu
 
-![Usage](./images/usage.gif)
+    ![Usage](./images/usage.gif)
 
 - **To select language to run:**
     - Use shortcut `Ctrl+Alt+J`
     - Or press `F1` and then select/type `Run By Language`
     - Then type or select the language to run: e.g. `php, javascript, bat, shellscript...`
 
-![Usage](./images/usageRunByLanguage.gif)
+    ![Usage](./images/usage-language.gif)
 
 - **To run custom command:**
     - Use shortcut `Ctrl+Alt+K`
@@ -48,7 +48,7 @@ Run code snippet or code file for multiple languages: **C, C++, Java, JavaScript
 
 ## Configuration
 
-Quick Runner uses the `quick-runner.*` settings namespace in your VS Code settings.
+Quick Runner uses the `quickrunner.*` settings namespace in your VS Code settings.
 
 ### Quick Example
 
@@ -56,9 +56,9 @@ To configure output options and custom compiler/runtime commands in your `settin
 
 ```json
 {
-    "quick-runner.clearPreviousOutput": true,
-    "quick-runner.showExecutionMessage": false,
-    "quick-runner.executorMap": {
+    "quickrunner.clearPreviousOutput": true,
+    "quickrunner.showExecutionMessage": false,
+    "quickrunner.executorMap": {
         "cpp": "clang++ -std=c++20 -O2 -Wall \"$fileName\" -o \"$fileNameWithoutExt\" && \"./$fileNameWithoutExt\"",
         "python": "python -u \"$fileName\""
     }
@@ -68,11 +68,11 @@ To configure output options and custom compiler/runtime commands in your `settin
 ### Executor Map
 
 Make sure the executor PATH of each language is set in your environment variable.
-You can customize `quick-runner.executorMap` to set specific commands or paths for any language:
+You can customize `quickrunner.executorMap` to set specific commands or paths for any language:
 
 ```json
 {
-    "quick-runner.executorMap": {
+    "quickrunner.executorMap": {
         "javascript": "node",
         "php": "C:\\php\\php.exe",
         "python": "python -u \"$fileName\"",
@@ -110,7 +110,7 @@ You can set executors per filename glob:
 
 ```json
 {
-    "quick-runner.executorMapByGlob": {
+    "quickrunner.executorMapByGlob": {
         "pom.xml": "cd $dir && mvn clean package",
         "*.test.js": "tap",
         "*.js": "node"
@@ -124,7 +124,7 @@ Set default language when file language cannot be determined:
 
 ```json
 {
-    "quick-runner.defaultLanguage": "javascript"
+    "quickrunner.defaultLanguage": "javascript"
 }
 ```
 
@@ -132,7 +132,7 @@ Set default language when file language cannot be determined:
 
 ```json
 {
-    "quick-runner.executorMapByFileExtension": {
+    "quickrunner.executorMapByFileExtension": {
         ".vbs": "cscript //Nologo",
         ".kt": "cd $dir && kotlinc $fileName -include-runtime -d $fileNameWithoutExt.jar && java -jar $fileNameWithoutExt.jar"
     }
@@ -143,7 +143,7 @@ Set default language when file language cannot be determined:
 
 ```json
 {
-    "quick-runner.customCommand": "echo Hello"
+    "quickrunner.customCommand": "echo Hello"
 }
 ```
 
@@ -151,42 +151,42 @@ Set default language when file language cannot be determined:
 
 ```json
 {
-    "quick-runner.cwd": "path/to/working/directory"
+    "quickrunner.cwd": "path/to/working/directory"
 }
 ```
 
 **About CWD Setting priority:**
 
-1. By default, use the `quick-runner.cwd` setting
-2. If `quick-runner.cwd` is not set and `quick-runner.fileDirectoryAsCwd` is `true`, use the directory of the file to be executed
-3. If `quick-runner.cwd` is not set and `quick-runner.fileDirectoryAsCwd` is `false`, use the path of root folder open in VS Code
+1. By default, use the `quickrunner.cwd` setting
+2. If `quickrunner.cwd` is not set and `quickrunner.fileDirectoryAsCwd` is `true`, use the directory of the file to be executed
+3. If `quickrunner.cwd` is not set and `quickrunner.fileDirectoryAsCwd` is `false`, use the path of root folder open in VS Code
 4. If no folder is open, use the OS temp directory
 
 ### Output & Execution Controls
 
-- `quick-runner.clearPreviousOutput`: Whether to clear previous output before each run (default is `false`).
-- `quick-runner.showExecutionMessage`: Whether to show extra execution messages like `[Running] ...` and `[Done] ...` (default is `true`).
-- `quick-runner.saveAllFilesBeforeRun`: Whether to save all files before running (default is `false`).
-- `quick-runner.saveFileBeforeRun`: Whether to save the current file before running (default is `false`).
-- `quick-runner.runInTerminal`: Whether to run code in Integrated Terminal (default is `false`).
-- `quick-runner.preserveFocus`: Whether to preserve focus on code editor after code run is triggered (default is `true`).
-- `quick-runner.ignoreSelection`: Whether to ignore selection to always run entire file (default is `false`).
-- `quick-runner.respectShebang`: Whether to respect Shebang to run code (default is `true`).
-- `quick-runner.showRunIconInEditorTitleMenu`: Whether to show 'Run Code' icon in editor title menu (default is `true`).
-- `quick-runner.showStopIconInEditorTitleMenu`: Whether to show 'Stop Code Run' icon in editor title menu when code is running (default is `true`).
-- `quick-runner.showRunCommandInEditorContextMenu`: Whether to show 'Run Code' command in editor context menu (default is `true`).
-- `quick-runner.showRunCommandInExplorerContextMenu`: Whether to show 'Run Code' command in explorer context menu (default is `true`).
-- `quick-runner.temporaryFileName`: Temporary file name used in running selected code snippet (default is `"tempQuickRunnerFile"`).
-- `quick-runner.terminalRoot`: For Windows system, replaces Windows style drive letter in command with Unix style root when using a custom shell (default is `""`).
+- `quickrunner.clearPreviousOutput`: Whether to clear previous output before each run (default is `false`).
+- `quickrunner.showExecutionMessage`: Whether to show extra execution messages like `[Running] ...` and `[Done] ...` (default is `true`).
+- `quickrunner.saveAllFilesBeforeRun`: Whether to save all files before running (default is `false`).
+- `quickrunner.saveFileBeforeRun`: Whether to save the current file before running (default is `false`).
+- `quickrunner.runInTerminal`: Whether to run code in Integrated Terminal (default is `false`).
+- `quickrunner.preserveFocus`: Whether to preserve focus on code editor after code run is triggered (default is `true`).
+- `quickrunner.ignoreSelection`: Whether to ignore selection to always run entire file (default is `false`).
+- `quickrunner.respectShebang`: Whether to respect Shebang to run code (default is `true`).
+- `quickrunner.showRunIconInEditorTitleMenu`: Whether to show 'Run Code' icon in editor title menu (default is `true`).
+- `quickrunner.showStopIconInEditorTitleMenu`: Whether to show 'Stop Code Run' icon in editor title menu when code is running (default is `true`).
+- `quickrunner.showRunCommandInEditorContextMenu`: Whether to show 'Run Code' command in editor context menu (default is `true`).
+- `quickrunner.showRunCommandInExplorerContextMenu`: Whether to show 'Run Code' command in explorer context menu (default is `true`).
+- `quickrunner.temporaryFileName`: Temporary file name used in running selected code snippet (default is `"tempQuickRunnerFile"`).
+- `quickrunner.terminalRoot`: For Windows system, replaces Windows style drive letter in command with Unix style root when using a custom shell (default is `""`).
 
 ## Change Log
 
-See Change Log [here](https://github.com/navneetguptacse/quick-runner/blob/main/CHANGELOG.md).
+See Change Log [here](https://github.com/navneetguptacse/quickrunner/blob/main/CHANGELOG.md).
 
 ## Issues
 
-Submit [issues](https://github.com/navneetguptacse/quick-runner/issues) if you find any bug or have suggestions.
+Submit [issues](https://github.com/navneetguptacse/quickrunner/issues) if you find any bug or have suggestions.
 
 ## Contribution
 
-Fork the [repo](https://github.com/navneetguptacse/quick-runner) and submit pull requests.
+Fork the [repo](https://github.com/navneetguptacse/quickrunner) and submit pull requests.

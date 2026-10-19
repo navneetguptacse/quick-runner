@@ -27,7 +27,7 @@ export class Utility {
     }
 
     public static getConfiguration(
-        section: string = "quick-runner",
+        section: string = "quickrunner",
         document?: vscode.TextDocument
     ): vscode.WorkspaceConfiguration {
         if (document) {

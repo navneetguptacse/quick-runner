@@ -2,7 +2,7 @@
     "name": "quickrunner",
     "displayName": "Quick Code Runner",
     "description": "Run C, C++, Java, JS, PHP, Python, Perl, Ruby, Go, Lua, Groovy, PowerShell, CMD, BASH, F#, C#, VBScript, TypeScript, CoffeeScript, Scala, Swift, Julia, Crystal, OCaml, R, AppleScript, Elixir, VB.NET, Clojure, Haxe, Obj-C, Rust, Racket, Scheme, AutoHotkey, AutoIt, Kotlin, Dart, Pascal, Haskell, Nim, D, Lisp, Kit, V, SCSS, Sass, CUDA, Less, Fortran, Ring, Standard ML, Zig, Mojo, Erlang, SPWN, Pkl, Gleam",
-    "version": "0.12.3",
+    "version": "0.12.4",
     "featureFlags": {
         "usingNewPythonInterpreterPathApi": true,
         "usingNewPythonInterpreterPathApiV2": true
@@ -25,83 +25,83 @@
         "multi-root ready"
     ],
     "activationEvents": [
-        "onCommand:quick-runner.run",
-        "onCommand:quick-runner.runCustomCommand",
-        "onCommand:quick-runner.runByLanguage",
-        "onCommand:quick-runner.stop",
+        "onCommand:quickrunner.run",
+        "onCommand:quickrunner.runCustomCommand",
+        "onCommand:quickrunner.runByLanguage",
+        "onCommand:quickrunner.stop",
         "onStartupFinished"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [
             {
-                "command": "quick-runner.run",
+                "command": "quickrunner.run",
                 "title": "Run Code",
                 "icon": "$(play)"
             },
             {
-                "command": "quick-runner.runCustomCommand",
+                "command": "quickrunner.runCustomCommand",
                 "title": "Run Custom Command"
             },
             {
-                "command": "quick-runner.runByLanguage",
+                "command": "quickrunner.runByLanguage",
                 "title": "Run By Language"
             },
             {
-                "command": "quick-runner.stop",
+                "command": "quickrunner.stop",
                 "title": "Stop Code Run",
                 "icon": "$(debug-stop)"
             }
         ],
         "keybindings": [
             {
-                "command": "quick-runner.run",
+                "command": "quickrunner.run",
                 "key": "ctrl+alt+n"
             },
             {
-                "command": "quick-runner.runCustomCommand",
+                "command": "quickrunner.runCustomCommand",
                 "key": "ctrl+alt+k"
             },
             {
-                "command": "quick-runner.runByLanguage",
+                "command": "quickrunner.runByLanguage",
                 "key": "ctrl+alt+j"
             },
             {
-                "command": "quick-runner.stop",
+                "command": "quickrunner.stop",
                 "key": "ctrl+alt+m"
             }
         ],
         "menus": {
             "editor/context": [
                 {
-                    "when": "!inOutput && config.quick-runner.showRunCommandInEditorContextMenu",
-                    "command": "quick-runner.run",
+                    "when": "!inOutput && config.quickrunner.showRunCommandInEditorContextMenu",
+                    "command": "quickrunner.run",
                     "group": "navigation"
                 },
                 {
-                    "when": "inOutput && !config.quick-runner.runInTerminal",
-                    "command": "quick-runner.stop",
+                    "when": "inOutput && !config.quickrunner.runInTerminal",
+                    "command": "quickrunner.stop",
                     "group": "stop-code-run"
                 }
             ],
             "editor/title/run": [
                 {
-                    "when": "config.quick-runner.showRunIconInEditorTitleMenu",
-                    "command": "quick-runner.run",
+                    "when": "config.quickrunner.showRunIconInEditorTitleMenu",
+                    "command": "quickrunner.run",
                     "group": "navigation"
                 }
             ],
             "editor/title": [
                 {
-                    "when": "config.quick-runner.showStopIconInEditorTitleMenu && quick-runner.codeRunning",
-                    "command": "quick-runner.stop",
+                    "when": "config.quickrunner.showStopIconInEditorTitleMenu && quickrunner.codeRunning",
+                    "command": "quickrunner.stop",
                     "group": "navigation"
                 }
             ],
             "explorer/context": [
                 {
-                    "when": "!explorerResourceIsFolder && config.quick-runner.showRunCommandInExplorerContextMenu",
-                    "command": "quick-runner.run",
+                    "when": "!explorerResourceIsFolder && config.quickrunner.showRunCommandInExplorerContextMenu",
+                    "command": "quickrunner.run",
                     "group": "navigation"
                 }
             ]
@@ -110,7 +110,7 @@
             "type": "object",
             "title": "Quick Runner configuration",
             "properties": {
-                "quick-runner.executorMapByGlob": {
+                "quickrunner.executorMapByGlob": {
                     "type": "object",
                     "default": {
                         "pom.xml": "cd $dir && mvn clean package"
@@ -118,7 +118,7 @@
                     "description": "Set the executor by glob.",
                     "scope": "resource"
                 },
-                "quick-runner.executorMap": {
+                "quickrunner.executorMap": {
                     "type": "object",
                     "default": {
                         "javascript": "node",
@@ -182,7 +182,7 @@
                     "description": "Set the executor of each language.",
                     "scope": "resource"
                 },
-                "quick-runner.executorMapByFileExtension": {
+                "quickrunner.executorMapByFileExtension": {
                     "type": "object",
                     "default": {
                         ".vb": "cd $dir && vbc /nologo $fileName && $dir$fileNameWithoutExt",
@@ -225,13 +225,13 @@
                     "description": "Set the executor of each file extension.",
                     "scope": "resource"
                 },
-                "quick-runner.customCommand": {
+                "quickrunner.customCommand": {
                     "type": "string",
                     "default": "echo Hello",
                     "description": "Set the custom command to run.",
                     "scope": "resource"
                 },
-                "quick-runner.languageIdToFileExtensionMap": {
+                "quickrunner.languageIdToFileExtensionMap": {
                     "type": "object",
                     "default": {
                         "bat": ".bat",
@@ -241,103 +241,103 @@
                     "description": "Set the mapping of languageId to file extension.",
                     "scope": "resource"
                 },
-                "quick-runner.defaultLanguage": {
+                "quickrunner.defaultLanguage": {
                     "type": "string",
                     "default": "",
                     "description": "Set the default language to run.",
                     "scope": "resource"
                 },
-                "quick-runner.cwd": {
+                "quickrunner.cwd": {
                     "type": "string",
                     "default": "",
                     "description": "Set the working directory.",
                     "scope": "resource"
                 },
-                "quick-runner.fileDirectoryAsCwd": {
+                "quickrunner.fileDirectoryAsCwd": {
                     "type": "boolean",
                     "default": false,
                     "description": "Whether to use the directory of the file to be executed as the working directory.",
                     "scope": "resource"
                 },
-                "quick-runner.clearPreviousOutput": {
+                "quickrunner.clearPreviousOutput": {
                     "type": "boolean",
                     "default": false,
                     "description": "Whether to clear previous output before each run.",
                     "scope": "resource"
                 },
-                "quick-runner.saveAllFilesBeforeRun": {
+                "quickrunner.saveAllFilesBeforeRun": {
                     "type": "boolean",
                     "default": false,
                     "description": "Whether to save all files before running.",
                     "scope": "resource"
                 },
-                "quick-runner.saveFileBeforeRun": {
+                "quickrunner.saveFileBeforeRun": {
                     "type": "boolean",
                     "default": false,
                     "description": "Whether to save the current file before running.",
                     "scope": "resource"
                 },
-                "quick-runner.showExecutionMessage": {
+                "quickrunner.showExecutionMessage": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to show extra execution message like [Running] ... and [Done] ...",
                     "scope": "resource"
                 },
-                "quick-runner.runInTerminal": {
+                "quickrunner.runInTerminal": {
                     "type": "boolean",
                     "default": false,
                     "description": "Whether to run code in Integrated Terminal.",
                     "scope": "resource"
                 },
-                "quick-runner.terminalRoot": {
+                "quickrunner.terminalRoot": {
                     "type": "string",
                     "default": "",
                     "description": "For Windows system, replaces the Windows style drive letter in the command with a Unix style root when using a custom shell as the terminal, like Bash or Cgywin. Example: Setting this to '/mnt/' will replace 'C:\\path' with '/mnt/c/path'",
                     "scope": "resource"
                 },
-                "quick-runner.preserveFocus": {
+                "quickrunner.preserveFocus": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to preserve focus on code editor after code run is triggered.",
                     "scope": "resource"
                 },
-                "quick-runner.ignoreSelection": {
+                "quickrunner.ignoreSelection": {
                     "type": "boolean",
                     "default": false,
                     "description": "Whether to ignore selection to always run entire file.",
                     "scope": "resource"
                 },
-                "quick-runner.showRunIconInEditorTitleMenu": {
+                "quickrunner.showRunIconInEditorTitleMenu": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to show 'Run Code' icon in editor title menu.",
                     "scope": "resource"
                 },
-                "quick-runner.showStopIconInEditorTitleMenu": {
+                "quickrunner.showStopIconInEditorTitleMenu": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to show 'Stop code run' icon in the editor title menu when code is running.",
                     "scope": "resource"
                 },
-                "quick-runner.showRunCommandInEditorContextMenu": {
+                "quickrunner.showRunCommandInEditorContextMenu": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to show 'Run Code' command in editor context menu.",
                     "scope": "resource"
                 },
-                "quick-runner.showRunCommandInExplorerContextMenu": {
+                "quickrunner.showRunCommandInExplorerContextMenu": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to show 'Run Code' command in explorer context menu.",
                     "scope": "resource"
                 },
-                "quick-runner.temporaryFileName": {
+                "quickrunner.temporaryFileName": {
                     "type": "string",
                     "default": "tempQuickRunnerFile",
                     "description": "Temporary file name used in running selected code snippet. When it is set as empty, the file name will be random.",
                     "scope": "resource"
                 },
-                "quick-runner.respectShebang": {
+                "quickrunner.respectShebang": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to respect Shebang to run code.",
@@ -347,7 +347,7 @@
         },
         "languages": [
             {
-                "id": "quick-runner-output",
+                "id": "quickrunner-output",
                 "mimetypes": [
                     "text/x-code-output"
                 ]
@@ -355,9 +355,9 @@
         ],
         "grammars": [
             {
-                "language": "quick-runner-output",
-                "scopeName": "quick-runner.output",
-                "path": "./syntaxes/quick-runner-output.tmLanguage"
+                "language": "quickrunner-output",
+                "scopeName": "quickrunner.output",
+                "path": "./syntaxes/quickrunner-output.tmLanguage"
             }
         ]
     },
@@ -386,10 +386,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/navneetguptacse/quick-runner.git"
+        "url": "https://github.com/navneetguptacse/quickrunner.git"
     },
     "bugs": {
-        "url": "https://github.com/navneetguptacse/quick-runner/issues"
+        "url": "https://github.com/navneetguptacse/quickrunner/issues"
     },
-    "homepage": "https://github.com/navneetguptacse/quick-runner#readme"
+    "homepage": "https://github.com/navneetguptacse/quickrunner#readme"
 }

@@ -3,9 +3,9 @@
 <plist version="1.0">
     <dict>
         <key>scopeName</key>
-        <string>quick-runner.output</string>
+        <string>quickrunner.output</string>
         <key>name</key>
-        <string>quick-runner-output</string>
+        <string>quickrunner-output</string>
         <key>patterns</key>
         <array>
             <dict>
@@ -25,7 +25,7 @@
                 <key>match</key>
                 <string>(\[Running\])(.*)</string>
                 <key>name</key>
-                <string>quick-runner.running</string>
+                <string>quickrunner.running</string>
             </dict>
             <dict>
                 <key>captures</key>
@@ -69,7 +69,7 @@
                 <key>match</key>
                 <string>(\[Done\])(.+)(?:(code=0)|(code=\d+))([^\d]+)(\d+(?:\.\d+)?)([^\d]+)</string>
                 <key>name</key>
-                <string>quick-runner.done</string>
+                <string>quickrunner.done</string>
             </dict>
         </array>
     </dict>
